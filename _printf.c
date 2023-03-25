@@ -10,8 +10,7 @@ int _print_char(va_list args)
 {
 	char c = va_arg(args, int);
 
-	putchar(c);
-
+	_putchar(c);
 	return (1);
 }
 
@@ -26,13 +25,15 @@ int _print_string(va_list args)
 	char *str = va_arg(args, char*);
 	int count = 0;
 
+	if (!str)
+		str = "(null)";
+
 	while (*str)
 	{
-		putchar(*str);
+		_putchar(*str);
 		str++;
 		count++;
 	}
-
 	return (count);
 }
 
@@ -44,39 +45,43 @@ int _print_string(va_list args)
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
 	int count = 0;
-	va_start(args, format);
 
+	va_list args;
+
+	va_start(args, format);
 	if (!format)
-		return (1);
+		return (-1);
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			switch (*format)
+			if (*format == '\0')
+				return (-1);
+			if (*format == '%')
 			{
-				case 'c':
-					count += _print_char(args);
-					break;
-				case 's':
-					count += _print_string(args);
-					break;
-				case '%':
-					putchar('%');
-					count++;
-					break;
+				_putchar('%');
+				count++;
+			}
+			else if (*format == 'c')
+				count += _print_char(args);
+			else if (*format == 's')
+				count += _print_string(args);
+			else
+			{
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
 			}
 		}
 		else
 		{
-			putchar(*format);
+			_putchar(*format);
 			count++;
 		}
 		format++;
 	}
-
 	va_end(args);
 	return (count);
 }
