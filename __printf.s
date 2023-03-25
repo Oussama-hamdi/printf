@@ -3,6 +3,7 @@
 /**
  * _print_char - writes a character to stdout
  * @args: argument list
+ *
  * Return: 1
  */
 int _print_char(va_list args)
@@ -16,6 +17,7 @@ int _print_char(va_list args)
 /**
  * _print_string - writes a string to stdout
  * @args: argument list
+ *
  * Return: number of characters printed
  */
 int _print_string(va_list args)
@@ -25,6 +27,7 @@ int _print_string(va_list args)
 
 	if (!str)
 		str = "(null)";
+
 	while (*str)
 	{
 		_putchar(*str);
@@ -35,39 +38,15 @@ int _print_string(va_list args)
 }
 
 /**
- * _print_int - writes an integer to stdout
- * @args: argument list
- * Return: number of characters printed
- */
-int _print_int(va_list args)
-{
-	int n = va_arg(args, int);
-	unsigned int num;
-	int count = 0;
-
-	if (n < 0)
-	{
-		_putchar('-');
-		count++;
-		num = -n;
-	}
-	else
-		num = n;
-	if (num / 10)
-		count += _print_int(num / 10);
-	_putchar(num % 10 + '0');
-	count++;
-	return (count);
-}
-
-/**
  * _printf - prints formatted output to stdout
  * @format: format string
+ *
  * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	int count = 0;
+
 	va_list args;
 
 	va_start(args, format);
@@ -89,8 +68,6 @@ int _printf(const char *format, ...)
 				count += _print_char(args);
 			else if (*format == 's')
 				count += _print_string(args);
-			else if (*format == 'd' || *format == 'i')
-				count += _print_int(args);
 			else
 			{
 				_putchar('%');
