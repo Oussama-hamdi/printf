@@ -13,9 +13,9 @@ int _printf(const char *format, ...)
 
 	if (!format)
 		return (1);
-	
+
 	va_start(args, format);
 	count = vprintf(format, args);
 	va_end(args);
-	return count;
+	return (count);
 }
