@@ -45,9 +45,8 @@ int _print_string(va_list args)
 int _printf(const char *format, ...)
 {
 	va_list args;
-
-	va_start(args, format);
 	int count = 0;
+	va_start(args, format);
 
 	if (!format)
 		return (1);
