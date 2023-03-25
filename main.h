@@ -22,5 +22,6 @@ typedef struct print
 
 int _printf(const char *format, ...);
 int _putchar(char c);
+int parser(const char *format, print_t p[], va_list arg_list);
 
 #endif /* MAIN_H */
