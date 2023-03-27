@@ -39,9 +39,8 @@ int _print_string(va_list args)
  * @args: argument list
  * Return: number of characters printed
  */
-int _print_int(va_list args)
+int _print_int(int n)
 {
-	int n = va_arg(args, int);
 	unsigned int num;
 	int count = 0;
 
@@ -90,7 +89,7 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 				count += _print_string(args);
 			else if (*format == 'd' || *format == 'i')
-				count += _print_int(args);
+				count += _print_int(va_arg(args, int));
 			else
 			{
 				_putchar('%');
