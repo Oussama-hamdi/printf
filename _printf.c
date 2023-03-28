@@ -9,7 +9,7 @@ int _print_char(va_list args)
 {
 	char c = va_arg(args, int);
 
-	_putchar(c);
+	putchar(c);
 	return (1);
 }
 
@@ -27,7 +27,7 @@ int _print_string(va_list args)
 		str = "(null)";
 	while (*str)
 	{
-		_putchar(*str);
+		putchar(*str);
 		str++;
 		count++;
 	}
@@ -46,7 +46,7 @@ int _print_int(int n)
 
 	if (n < 0)
 	{
-		_putchar('-');
+		putchar('-');
 		count++;
 		num = -n;
 	}
@@ -54,7 +54,7 @@ int _print_int(int n)
 		num = n;
 	if (num / 10)
 		count += _print_int(num / 10);
-	_putchar(num % 10 + '0');
+	putchar(num % 10 + '0');
 	count++;
 	return (count);
 }
@@ -81,7 +81,7 @@ int _printf(const char *format, ...)
 				return (-1);
 			if (*format == '%')
 			{
-				_putchar('%');
+				putchar('%');
 				count++;
 			}
 			else if (*format == 'c')
@@ -92,14 +92,14 @@ int _printf(const char *format, ...)
 				count += _print_int(va_arg(args, int));
 			else
 			{
-				_putchar('%');
-				_putchar(*format);
+				putchar('%');
+				putchar(*format);
 				count += 2;
 			}
 		}
 		else
 		{
-			_putchar(*format);
+			putchar(*format);
 			count++;
 		}
 		format++;
